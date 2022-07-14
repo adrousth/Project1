@@ -5,7 +5,7 @@ create table ers_users (
 	user_password varchar(50) not null,
 	first_name varchar(50),
 	last_name varchar(50),
-	email varchar(50) not null,
+	email varchar(50) unique not null,
 	user_role varchar(50) not null
 
 );
@@ -13,7 +13,7 @@ create table ers_users (
 drop table if exists ers_reimbursements
 create table ers_reimbursements (
 	reimbursement_id serial primary key,
-	reimburesment_amount numeric(10,2) not null,
+	reimbursement_amount numeric(10,2) not null,
 	submitted timestamp not null default current_timestamp,
 	resolved timestamp,
 	status varchar(50) not null,
@@ -26,3 +26,16 @@ create table ers_reimbursements (
 	constraint fk_ers_users_resolver foreign key (reimbursement_resolver) references ers_users(user_id)
 
 );
+
+
+insert into ers_users (username, user_password, first_name, last_name, email, user_role)
+values
+('adrousth', 'foobar', 'Alex', 'Drousth', 'adrousth@gmail.com', 'employee'),
+('steve245', 'foobar1', 'Steve', 'Smith', 'stevey@email.net', 'employee'),
+('johnnyboy', 'foobar2', 'John', 'Boy', 'jboy@something.gov', 'employee'),
+('jsmith', 'foobar3', 'Joe', 'Smith', 'jsmith@here.com', 'finance_manager'),
+('btables', 'foobar', 'Bobby', 'Tables', 'btables@here.com', 'finance_manager');
+
+select * from ers_users;
+
+
