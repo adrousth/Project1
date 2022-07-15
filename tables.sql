@@ -10,13 +10,13 @@ create table ers_users (
 
 );
 
-drop table if exists ers_reimbursements
+drop table if exists ers_reimbursements;
 create table ers_reimbursements (
 	reimbursement_id serial primary key,
 	reimbursement_amount numeric(10,2) not null,
 	submitted timestamp not null default current_timestamp,
 	resolved timestamp,
-	status varchar(50) not null,
+	status varchar(50) not null default 'pending',
 	reimbursement_type varchar(50) not null,
 	description varchar(500) not null,
 	receipt bytea,
@@ -27,6 +27,31 @@ create table ers_reimbursements (
 
 );
 
+create table ers_statuses (
+	status varchar(50) primary key
+);
+
+insert into ers_statuses
+values
+('pending'),
+('approved'),
+('denied');
+
+select * from ers_statuses;
+
+create table ers_types (
+	reimbursement_type varchar(50) primary key 
+);
+
+insert into ers_types
+values
+('lodging'),
+('travel'),
+('food'),
+('other');
+
+select * from ers_types;
+
 
 insert into ers_users (username, user_password, first_name, last_name, email, user_role)
 values
@@ -36,6 +61,15 @@ values
 ('jsmith', 'foobar3', 'Joe', 'Smith', 'jsmith@here.com', 'finance_manager'),
 ('btables', 'foobar', 'Bobby', 'Tables', 'btables@here.com', 'finance_manager');
 
-select * from ers_users;
+select * from ers_users where username = 'adrousth';
+
+insert into ers_reimbursements (reimbursement_amount, reimbursement_type, description, reimbursement_author)
+values
+(150.00, 'lodging', 'hotel stay', 1),
+(200.00, 'food', 'mcdonalds', 2),
+(50.00, 'travel', 'taxi', 2),
+(10.50, 'other', 'pens', 3);
 
 
+
+select * from ers_reimbursements;

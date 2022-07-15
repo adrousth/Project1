@@ -33,7 +33,7 @@
 * Add reimbursement request (1 user story)
     - As an employee, I want to be able to add a reimbursement request, so that they can either be approved or denied by a finance manager
         - given I am an employee who is logged in and at the reimbursement request form, when I input valid information for a reimbursement request in the form and submit it, then a new request should be added to the database with the given information with the current time stamp and a status of pending for the employee.
-        - given I am an employee who is logged in and at the reimbursement request form, when I input invalid information for a reimbursement request in the form and submit it, then I should receive a message which says why the given information is not valid.
+        - given I am an employee who is logged in and at the reimbursement request form, when I input invalid information for a reimbursement request in the form and submit it, then I should receive a message which says what information is not valid and why.
 
 
 
