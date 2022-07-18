@@ -10,3 +10,7 @@ class UserNotFoundError(Exception):
 class RequestNotFoundError(Exception):
     pass
 
+
+class LoginError(Exception):
+    pass
+

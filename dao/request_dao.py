@@ -17,7 +17,6 @@ class RequestDao:
                                             request[6], request[7], request[8], request[9]).to_dict())
         return requests
 
-
     def get_all_requests(self):
         with psycopg.connect(self.__connection_string) as conn:
             with conn.cursor() as cur:

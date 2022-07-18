@@ -12,3 +12,14 @@ class UserDao:
                             " WHERE username = %s;", (username,))
                 user = cur.fetchone()
         return user
+
+    def get_user_by_username_and_password(self, username, password):
+
+        with psycopg.connect(self.__connection_string) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT user_id, username, first_name, last_name, email, user_role FROM ers_users"
+                            " WHERE username = %s AND user_password = %s;", (username, password))
+                user = cur.fetchone()
+        return user
+
+

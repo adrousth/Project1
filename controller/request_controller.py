@@ -14,3 +14,11 @@ def get_all_requests():
     }
 
 
+@request_ctrl.route("/requests", methods=["POST"])
+def add_new_request():
+    data = request.get_json()
+    print(data['amount'])
+    print(data['description'])
+    print(data['type'])
+    return {}, 201
+
