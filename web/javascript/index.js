@@ -30,21 +30,17 @@ requestSubmitButton.addEventListener('click', () => {
     
     } else if (res.status == 400) {
 
-        // res.json().then((data) => {
-        //     let registrationErrorMessagesDiv = document.getElementById('registration-error-messages')
-        //     registrationErrorMessagesDiv.innerHTML = '';
+        
+        res.json().then((data) => {
+            let errorMessageDiv = document.getElementById("request-error-messages");
+            let message = data.message;
+            errorMessageDiv.innerHTML = "";
+            let errorElement = document.createElement('p')
+            errorElement.innerHTML = message
+            
+            errorMessageDiv.appendChild(errorElement)
 
-        //     let errorMessages = data.messages;
-        //     for (let errorMessage of errorMessages) {
-        //         let errorElement = document.createElement('p');
-        //         errorElement.innerHTML = errorMessage;
-        //         errorElement.style.color = 'red';
-        //         errorElement.style.fontWeight = 'bold';
-
-        //         registrationErrorMessagesDiv.appendChild(errorElement);
-        //     }
-
-        // });
+        });
 
     }
 }).catch((err) => {

@@ -14,3 +14,6 @@ class RequestNotFoundError(Exception):
 class LoginError(Exception):
     pass
 
+
+class RequestNotAddedError(Exception):
+    pass

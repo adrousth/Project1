@@ -11,14 +11,22 @@ request_service = RequestService()
 def get_all_requests():
     return {
         "requests": request_service.get_all_requests()
-    }
+    }, 200
 
 
 @request_ctrl.route("/requests", methods=["POST"])
 def add_new_request():
     data = request.get_json()
-    print(data['amount'])
-    print(data['description'])
-    print(data['type'])
-    return {}, 201
+    # TODO add logged in user
+    user_id = 1
+    try:
+        returned_request = request_service.add_new_request(data, user_id)
+        return {
+                   "request": returned_request
+               }, 201
+    except InvalidParameterError as e:
+        return {
+            "message": str(e)
+        }, 400
+
 
