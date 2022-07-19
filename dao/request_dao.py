@@ -38,3 +38,14 @@ class RequestDao:
                 returned_request = cur.fetchone()
 
         return returned_request
+
+    def get_all_requests_for_user(self, user_id):
+        with psycopg.connect(self.__connection_string) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT * FROM ers_reimbursements WHERE reimbursement_author = %s;", (user_id,))
+                requests = []
+                for request in cur:
+                    requests.append(Request(request[0], request[1], request[2], request[3], request[4], request[5],
+                                            request[6], request[7], request[8], request[9]).to_dict())
+        return requests
+

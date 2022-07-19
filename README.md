@@ -8,6 +8,8 @@ https://github.com/220613-pwa-ext/training/tree/main/project-1
 - Environment set up
   - source venv/Scripts/activate
   - pip install flask
-  - pip install psycopg
+  - pip install psycopg[binary]
   - pip install pytest
   - pip install pytest-mock
+  - pip install flask-cors
+  - pip install flask-session

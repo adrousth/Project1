@@ -6,6 +6,15 @@ user_ctrl = Blueprint('user_controller', __name__)
 user_service = UserService()
 
 
+@user_ctrl.route('/')
+def user_status():
+    user_info = session.get("user_info")
+    if user_info is None:
+        return False
+    else:
+        return True
+
+
 @user_ctrl.route("/get-user", methods=["GET"])
 def get_user():
     return user_service.get_user_by_username('adrousth').to_dict()

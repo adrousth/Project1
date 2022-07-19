@@ -38,3 +38,6 @@ class RequestService:
         if returned_request is None:
             raise RequestNotAddedError("Request was not added.")
         return returned_request
+
+    def get_all_requests_for_user(self, user_id):
+        return self.request_dao.get_all_requests_for_user(user_id)
