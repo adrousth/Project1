@@ -1,5 +1,5 @@
 let requestTableElement = document.querySelector('#requests-table tbody')
-fetch('http://127.0.0.1:8080/requests', {
+fetch('http://127.0.0.1:8080/manager/requests', {
     'credentials': 'include',
     'method': 'GET'
     
@@ -11,6 +11,8 @@ fetch('http://127.0.0.1:8080/requests', {
             let requestRow = document.createElement('tr');
             let requestId = document.createElement('td');
             requestId.innerHTML = request.request_id;
+            let requestAuthorId = document.createElement('td');
+            requestAuthorId.innerHTML = request.author;
             let requestAmount = document.createElement('td');
             requestAmount.innerHTML = "$" + request.amount;
             let requestTimeSumbitted = document.createElement('td');
@@ -26,6 +28,7 @@ fetch('http://127.0.0.1:8080/requests', {
 
 
             requestRow.appendChild(requestId);
+            requestRow.appendChild(requestAuthorId);
             requestRow.appendChild(requestAmount);
             requestRow.appendChild(requestTimeSumbitted);
             requestRow.appendChild(requestTimeResolved);

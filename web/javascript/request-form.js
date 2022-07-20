@@ -2,6 +2,7 @@ let amountInput = document.getElementById('amount-input');
 let descriptionInput = document.getElementById('description-input');
 let typeButtons = document.querySelectorAll('input[name="type"]');
 let requestSubmitButton = document.getElementById('request-submit-btn');
+let logoutButton = document.getElementById('log-out');
 
 requestSubmitButton.addEventListener('click', () => {
   let selectedRadioButton;
@@ -14,7 +15,7 @@ requestSubmitButton.addEventListener('click', () => {
   }
   fetch('http://127.0.0.1:8080/requests', {
     'method': 'POST',
-    
+    'credentials': 'include',
     'headers': {
         'Content-Type': 'application/json' 
     },
@@ -47,5 +48,6 @@ requestSubmitButton.addEventListener('click', () => {
   console.log(err);
 })
 });
+
 
 

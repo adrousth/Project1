@@ -7,7 +7,7 @@ loginButton.addEventListener('click', () => {
     
     fetch('http://127.0.0.1:8080/login', {
       'method': 'POST',
-      
+      credentials: 'include',
       'headers': {
           'Content-Type': 'application/json' 
       },
@@ -18,13 +18,13 @@ loginButton.addEventListener('click', () => {
   }).then((res) => {
       if (res.status == 200) {
   
-          window.location.href = '../html/success.html'
+          window.location.href = '../html/user.html'
       
       } else if (res.status == 400) {
   
           res.json().then((data) => {
-              let registrationErrorMessagesDiv = document.getElementById('login-error-messages')
-              registrationErrorMessagesDiv.innerHTML = '';
+              let loginErrorMessageDiv = document.getElementById('login-error-messages')
+              loginErrorMessageDiv.innerHTML = '';
   
               let errorMessage = data.message;
           
@@ -33,7 +33,7 @@ loginButton.addEventListener('click', () => {
               errorElement.style.color = 'red';
               errorElement.style.fontWeight = 'bold';
   
-              registrationErrorMessagesDiv.appendChild(errorElement);
+              loginErrorMessageDiv.appendChild(errorElement);
               
   
           });
