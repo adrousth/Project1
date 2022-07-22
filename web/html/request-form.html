@@ -17,30 +17,16 @@
       <a class="navbar-item" href="../html/request-form.html">
         New request
       </a>
+      <a class="navbar-item" href="../html/manager.html">
+        Manager
+      </a>
       <a class="navbar-item" href="../html/user.html">
         User
       </a>
       <a class="navbar-item" id="log-out">Log out</a>
-      <script>
-        logoutButton.addEventListener('click', () => {
-          fetch('http://127.0.0.1:8080/logout', {
-            'method': 'POST',
-            'credentials': 'include',
-        
-          }).then((res) => {
-            if (res.status == 200) {
-              window.location.href = '../html/login.html'
-            }
-          })})
-      </script>
     </div>
   </div>
     <div class="container has-background-light">
-      <div class="field">
-        <div class="control">
-          <button id="logout-btn" class="button is-link">Logout</button>
-        </div>
-      </div>
         <div class="columns is-justify-content-center">
             <div class="column is-6 has-background-primary">
                 <h1 class="is-size-1 has-text-centered">Reimbursement Request</h1>

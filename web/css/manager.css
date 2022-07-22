@@ -1,0 +1,6 @@
+select option {
+    background-color: white;
+}
+select option[value="approved"] {
+    background-color: blue;
+}

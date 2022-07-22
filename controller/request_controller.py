@@ -1,6 +1,6 @@
 from exception.exceptions import *
 from service.request_service import RequestService
-from flask import request, Blueprint, session
+from flask import request, Blueprint, session, render_template
 
 
 request_ctrl = Blueprint('request_controller', __name__)
@@ -54,4 +54,14 @@ def add_new_request():
             "message": str(e)
         }, 400
 
+
+@request_ctrl.route("/request/<request_id>")
+def get_request_by_id(request_id):
+    try:
+        returned_request = request_service.get_request_by_id(request_id)
+        return render_template("request.html", request=returned_request)
+    except RequestNotFoundError as e:
+        return {
+            "message": e
+        }, 404
 

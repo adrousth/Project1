@@ -29,7 +29,9 @@ def login_user():
         user = user_service.login_user(data)
         session['user_info'] = user
         print("logged in user", session.get('user_info'))
-        return user, 200
+        return {
+            "user_info": user
+               }, 200
     except LoginError as e:
         print(e)
         return {

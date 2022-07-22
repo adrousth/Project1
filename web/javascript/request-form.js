@@ -2,7 +2,7 @@ let amountInput = document.getElementById('amount-input');
 let descriptionInput = document.getElementById('description-input');
 let typeButtons = document.querySelectorAll('input[name="type"]');
 let requestSubmitButton = document.getElementById('request-submit-btn');
-let logoutButton = document.getElementById('log-out');
+
 
 requestSubmitButton.addEventListener('click', () => {
   let selectedRadioButton;
@@ -49,5 +49,15 @@ requestSubmitButton.addEventListener('click', () => {
 })
 });
 
-
+let logoutButton = document.getElementById('log-out');
+logoutButton.addEventListener('click', () => {
+    fetch('http://127.0.0.1:8080/logout', {
+        'method': 'POST',
+        'credentials': 'include',
+        
+        }).then((res) => {
+            if (res.status == 200) {
+              window.location.href = '../html/login.html'
+            }
+          })})
 

@@ -16,11 +16,15 @@ loginButton.addEventListener('click', () => {
           "password": passwordInput.value,
       })
   }).then((res) => {
-      if (res.status == 200) {
-  
-          window.location.href = '../html/user.html'
-      
-      } else if (res.status == 400) {
+    if (res.status == 200) {
+        res.json().then((data) => {
+            if (data.user_info.user_role == "employee") {
+                window.location.href = '../html/user.html'
+            } else if (data.user_info.user_role == "finance_manager") {
+                window.location.href = '../html/manager.html'
+            }
+        })
+    } else if (res.status == 400) {
   
           res.json().then((data) => {
               let loginErrorMessageDiv = document.getElementById('login-error-messages')

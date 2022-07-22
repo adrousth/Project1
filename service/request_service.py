@@ -41,3 +41,9 @@ class RequestService:
 
     def get_all_requests_for_user(self, user_id):
         return self.request_dao.get_all_requests_for_user(user_id)
+
+    def get_request_by_id(self, request_id):
+        request = self.request_dao.get_request_by_id(request_id)
+        if request is None:
+            raise RequestNotFoundError(f"request with id of {request_id} was not found.")
+        return request

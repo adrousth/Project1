@@ -49,3 +49,10 @@ class RequestDao:
                                             request[6], request[7], request[8], request[9]).to_dict())
         return requests
 
+    def get_request_by_id(self, request_id):
+        with psycopg.connect(self.__connection_string) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT * FROM ers_reimbursements WHERE reimbursement_id = %s;", (request_id,))
+                request = cur.fetchone()
+
+        return request
