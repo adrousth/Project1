@@ -47,3 +47,13 @@ class RequestService:
         if request is None:
             raise RequestNotFoundError(f"request with id of {request_id} was not found.")
         return request
+
+    def update_requests(self, data, user_id):
+        print(data)
+        if data is None or len(data) == 0:
+            raise InvalidParameterError("No requests selected to update")
+        updated_requests = self.request_dao.update_requests(data, user_id)
+        return updated_requests
+
+
+

@@ -56,3 +56,23 @@ class RequestDao:
                 request = cur.fetchone()
 
         return request
+
+    def update_requests(self, data, user_id):
+        with psycopg.connect(self.__connection_string) as conn:
+            with conn.cursor() as cur:
+                for data_point in data:
+                    cur.execute("UPDATE ers_reimbursements"
+                                " SET status = %s, reimbursement_resolver = %s, resolved = current_timestamp"
+                                " WHERE reimbursement_id = %s RETURNING *", (data[data_point], user_id, data_point))
+                    requests = []
+                    # for request in cur:
+                    #     requests.append(Request(request[0], request[1], request[2], request[3], request[4], request[5],
+                    #                             request[6], request[7], request[8], request[9]).to_dict())
+                    cur.execute("SELECT * FROM ers_reimbursements")
+                    for request in cur:
+                        requests.append(Request(request[0], request[1], request[2], request[3], request[4], request[5],
+                                                request[6], request[7], request[8], request[9]).to_dict())
+
+        return requests
+
+

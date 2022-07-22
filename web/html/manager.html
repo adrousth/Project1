@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manager page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../css/manager.css">
+    
 </head>
 <body>
     <div class="has-text-centered">
@@ -26,7 +26,7 @@
                 <th>
                     <label for="status">Status</label>
 
-                    <select name="status" id="status">
+                    <select name="sort_status" id="status">
                         <option value="all">All</option>
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>
@@ -40,6 +40,7 @@
         <tbody>
         </tbody>
     </table>
+    <div class="field"><div class="control"><button id="update-statuses" class="button is-link">Update Statuses</button></div></div>
     <script src="../javascript/manager.js"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@ def get_all_requests_for_user():
 @request_ctrl.route("/manager/requests", methods=["GET"])
 def get_all_requests_manager():
     user_info = session.get("user_info")
+    print(user_info)
     if user_info is None:
         return {
             "message": "you cannot view requests when you are not logged in."
@@ -65,3 +66,24 @@ def get_request_by_id(request_id):
             "message": e
         }, 404
 
+
+@request_ctrl.route("/update-requests", methods=["POST"])
+def update_requests():
+    data = request.get_json()
+    user_info = session.get("user_info")
+    print(data)
+    if user_info is None:
+        return {
+                   "message": "you cannot update a request when you are not logged in."
+               }, 400
+    try:
+        user_id = user_info["user_id"]
+        returned_request = request_service.update_requests(data, user_id)
+        print(returned_request)
+        return {
+                   "requests": returned_request
+               }, 201
+    except InvalidParameterError as e:
+        return {
+                   "message": str(e)
+               }, 400
