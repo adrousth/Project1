@@ -39,14 +39,19 @@ def get_all_requests_manager():
 
 @request_ctrl.route("/requests", methods=["POST"])
 def add_new_request():
-    data = request.get_json()
+    data = request.form
+    receipt = type(request.files['receipt'])
     user_info = session.get("user_info")
+    print(data)
+    print(receipt)
+
     if user_info is None:
         return {
             "message": "you cannot create a request when you are not logged in."
         }, 400
     try:
-        returned_request = request_service.add_new_request(data, user_info['user_id'])
+
+        returned_request = request_service.add_new_request(data, receipt, user_info['user_id'])
         return {
                    "request": returned_request
                }, 201

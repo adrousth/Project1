@@ -23,7 +23,8 @@ fetch('http://127.0.0.1:8080/requests', {
             requestType.innerHTML = request.request_type;
             let requestDescription = document.createElement('td');
             requestDescription.innerHTML = request.description;
-
+            let requestReceipt = document.createElement('td')
+            requestReceipt.innerHTML = request.receipt
 
             requestRow.appendChild(requestId);
             requestRow.appendChild(requestAmount);
@@ -32,6 +33,7 @@ fetch('http://127.0.0.1:8080/requests', {
             requestRow.appendChild(requestStatus);
             requestRow.appendChild(requestType);
             requestRow.appendChild(requestDescription);
+            requestRow.appendChild(requestReceipt)
             requestTableElement.appendChild(requestRow);
         }
 

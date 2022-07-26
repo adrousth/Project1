@@ -25,6 +25,10 @@ class Request:
         self.resolver = resolver
 
     def to_dict(self):
+        try:
+            self.receipt = self.receipt.decode()
+        except AttributeError:
+            pass
         return {
             "request_id": self.request_id,
             "amount": self.amount,

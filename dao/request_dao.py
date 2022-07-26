@@ -29,13 +29,16 @@ class RequestDao:
         return requests
 
     # TODO make sure add user to reimbursement
-    def add_new_request(self, amount, description, request_type, user_id):
+    def add_new_request(self, amount, description, request_type, receipt, user_id):
         with psycopg.connect(self.__connection_string) as conn:
             with conn.cursor() as cur:
                 cur.execute("INSERT INTO ers_reimbursements (reimbursement_amount, description, reimbursement_type,"
-                            "reimbursement_author) VALUES (%s, %s, %s, %s) RETURNING *",
-                            (amount, description, request_type, user_id))
-                returned_request = cur.fetchone()
+                            "receipt, reimbursement_author) VALUES (%s, %s, %s, %s, %s) RETURNING *",
+                            (amount, description, request_type, str(receipt).encode(), user_id))
+                request = cur.fetchone()
+
+        returned_request = Request(request[0], request[1], request[2], request[3], request[4], request[5],
+                                   request[6], request[7], request[8], request[9]).to_dict()
 
         return returned_request
 

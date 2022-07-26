@@ -13,7 +13,7 @@ class RequestService:
         return self.request_dao.get_requests_by_status(status)
 
     # TODO make sure user exists!
-    def add_new_request(self, data, user_id):
+    def add_new_request(self, data, receipt, user_id):
         try:
             amount = data['amount']
             description = data['description']
@@ -34,7 +34,7 @@ class RequestService:
         if request_type not in ('lodging', 'food', 'travel', 'other'):
             raise InvalidParameterError("request type must be lodging, food, travel or other")
 
-        returned_request = self.request_dao.add_new_request(amount, description, request_type, user_id)
+        returned_request = self.request_dao.add_new_request(amount, description, request_type, receipt, user_id)
         if returned_request is None:
             raise RequestNotAddedError("Request was not added.")
         return returned_request
