@@ -128,3 +128,14 @@ changeStatusButton.addEventListener('click', () => {
       
 })})
 
+let logoutButton = document.getElementById('log-out');
+logoutButton.addEventListener('click', () => {
+    fetch('http://127.0.0.1:8080/logout', {
+        'method': 'POST',
+        'credentials': 'include',
+        
+        }).then((res) => {
+            if (res.status == 200) {
+              window.location.href = '../html/login.html'
+            }
+          })})
