@@ -12,8 +12,8 @@ class RequestService:
     def get_requests_by_status(self, status):
         return self.request_dao.get_requests_by_status(status)
 
-    # TODO make sure user exists!
     def add_new_request(self, data, receipt, user_id):
+        print(receipt)
         try:
             amount = data['amount']
             description = data['description']
@@ -49,9 +49,11 @@ class RequestService:
         return request
 
     def update_requests(self, data, user_id):
-        print(data)
         if data is None or len(data) == 0:
             raise InvalidParameterError("No requests selected to update")
+        for data_point in data:
+            if data[data_point] not in ("approved", "denied"):
+                raise InvalidParameterError("Can only change status to approved or denied")
         updated_requests = self.request_dao.update_requests(data, user_id)
         return updated_requests
 

@@ -40,10 +40,12 @@ def get_all_requests_manager():
 @request_ctrl.route("/requests", methods=["POST"])
 def add_new_request():
     data = request.form
-    receipt = type(request.files['receipt'])
+    try:
+        receipt = request.files['receipt'].read()
+    except KeyError:
+        receipt = None
     user_info = session.get("user_info")
     print(data)
-    print(receipt)
 
     if user_info is None:
         return {
@@ -65,7 +67,10 @@ def add_new_request():
 def get_request_by_id(request_id):
     try:
         returned_request = request_service.get_request_by_id(request_id)
-        return render_template("request.html", request=returned_request)
+        print(type(returned_request[7]))
+        return {
+            "request": returned_request
+        }
     except RequestNotFoundError as e:
         return {
             "message": e
@@ -84,7 +89,6 @@ def update_requests():
     try:
         user_id = user_info["user_id"]
         returned_request = request_service.update_requests(data, user_id)
-        print(returned_request)
         return {
                    "requests": returned_request
                }, 201

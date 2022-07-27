@@ -17,7 +17,7 @@ def user_status():
 
 @user_ctrl.route("/get-user", methods=["GET"])
 def get_user():
-    return user_service.get_user_by_username('adrousth').to_dict()
+    return user_service.get_user_by_username('').to_dict()
 
 
 @user_ctrl.route("/login", methods=["POST"])

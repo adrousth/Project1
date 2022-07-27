@@ -70,15 +70,26 @@ function displayRequests(requests, filter) {
         
         statusSelect.appendChild(statusOptionDenied)
         requestStatus.appendChild(statusSelect.cloneNode(true));
-      } else {
+      } else if (request.status == 'approved') {
         requestStatus.innerHTML = request.status;
-      }
+        requestStatus.style.color = "green"
+      } else if (request.status == 'denied') {
+        requestStatus.innerHTML = request.status;
+        requestStatus.style.color = "red"
+      } 
               
       let requestType = document.createElement('td');
       requestType.innerHTML = request.request_type;
       let requestDescription = document.createElement('td');
       requestDescription.innerHTML = request.description;
-
+      let requestReceipt = document.createElement('td')
+      if (request.receipt == null) {
+        requestReceipt.innerHTML = "No Receipt"
+      } else {
+        let img = new Image()
+        img.src = 'data:image/png;base64,' + request.receipt
+        requestReceipt.appendChild(img)
+      }
 
       requestRow.appendChild(requestId);
       requestRow.appendChild(requestAuthorId);
@@ -89,6 +100,7 @@ function displayRequests(requests, filter) {
       requestRow.appendChild(requestStatus);
       requestRow.appendChild(requestType);
       requestRow.appendChild(requestDescription);
+      requestRow.appendChild(requestReceipt)
       requestTableElement.appendChild(requestRow);
   }
   '<div class="field"><div class="control"><button id="update-statuses" class="button is-link">Update Statuses</button></div></div>'

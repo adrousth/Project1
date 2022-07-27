@@ -32,9 +32,10 @@ class RequestDao:
     def add_new_request(self, amount, description, request_type, receipt, user_id):
         with psycopg.connect(self.__connection_string) as conn:
             with conn.cursor() as cur:
+
                 cur.execute("INSERT INTO ers_reimbursements (reimbursement_amount, description, reimbursement_type,"
                             "receipt, reimbursement_author) VALUES (%s, %s, %s, %s, %s) RETURNING *",
-                            (amount, description, request_type, str(receipt).encode(), user_id))
+                            (amount, description, request_type, receipt, user_id))
                 request = cur.fetchone()
 
         returned_request = Request(request[0], request[1], request[2], request[3], request[4], request[5],
@@ -48,8 +49,10 @@ class RequestDao:
                 cur.execute("SELECT * FROM ers_reimbursements WHERE reimbursement_author = %s;", (user_id,))
                 requests = []
                 for request in cur:
+
                     requests.append(Request(request[0], request[1], request[2], request[3], request[4], request[5],
                                             request[6], request[7], request[8], request[9]).to_dict())
+
         return requests
 
     def get_request_by_id(self, request_id):

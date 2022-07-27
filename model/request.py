@@ -11,6 +11,9 @@
 # 	reimbursement_resolver integer,
 # 	constraint fk_ers_users_author foreign key (reimbursement_author) references ers_users(user_id),
 # 	constraint fk_ers_users_resolver foreign key (reimbursement_resolver) references ers_users(user_id)
+import base64
+
+
 class Request:
     def __init__(self, request_id, amount, submitted, resolved, status, request_type, description, receipt, author, resolver):
         self.request_id = request_id
@@ -26,8 +29,8 @@ class Request:
 
     def to_dict(self):
         try:
-            self.receipt = self.receipt.decode()
-        except AttributeError:
+            self.receipt = base64.b64encode(self.receipt).decode()
+        except TypeError:
             pass
         return {
             "request_id": self.request_id,

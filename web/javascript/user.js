@@ -24,8 +24,13 @@ fetch('http://127.0.0.1:8080/requests', {
             let requestDescription = document.createElement('td');
             requestDescription.innerHTML = request.description;
             let requestReceipt = document.createElement('td')
-            requestReceipt.innerHTML = request.receipt
-
+            if (request.receipt == null) {
+              requestReceipt.innerHTML = "No Receipt"
+            } else {
+              let img = new Image()
+              img.src = 'data:image/png;base64,' + request.receipt
+              requestReceipt.appendChild(img)
+            }
             requestRow.appendChild(requestId);
             requestRow.appendChild(requestAmount);
             requestRow.appendChild(requestTimeSumbitted);
